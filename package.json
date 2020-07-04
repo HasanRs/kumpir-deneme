@@ -2,9 +2,9 @@
   "name": "kumpir",
   "version": "0.0.5",
   "description": "Splax#6271",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node index.js"
   },
   "keywords": [
     "Splax",
