@@ -1,0 +1,32 @@
+{
+  "name": "kumpir",
+  "version": "0.0.5",
+  "description": "Splax#6271",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "Splax",
+    "Kumpir"
+  ],
+  "author": "Splax#6271",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "chalk": "^4.1.0",
+    "common-tags": "^1.8.0",
+    "crypto": "^1.0.1",
+    "discord.js": "^11.5.1",
+    "eslint": "^7.3.1",
+    "fs": "0.0.1-security",
+    "jimp": "^0.14.0",
+    "moment": "^2.27.0",
+    "moment-duration-format": "^2.3.2",
+    "nodemon": "^2.0.4",
+    "os": "^0.1.1",
+    "quick.db": "^7.1.1",
+    "snekfetch": "^4.0.4",
+    "sqlite": "^4.0.11"
+  }
+}
