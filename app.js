@@ -115,68 +115,6 @@ fs.readdir('./komutlar/kayıt', (err, files) => {
 	console.log('');
 });
 
-// ------- Genel Komutlar Bölümü -------- \\
-fs.readdir('./komutlar/genel', (err, files) => {
-	console.log(`// (${files.length}) Genel Komutlar Bölümü \\\\`);
-	if (err) {
-		return console.error(err);
-	}
-	let jsFile = files.filter(f => f.endsWith('.js'));
-	if(jsFile.length <= 0) return console.log('JS dosyası yok! \n');
-	files.forEach((file) => {
-		if (!file.endsWith('.js')) {
-			return;
-		}
-		let Komut = require(`./komutlar/genel/${file}`);
-		let Komutismi = file.split('.')[0];
-		client.commands.set(Komut.help.name, Komut);
-		console.log(`Komut : ${Komutismi}`);
-		if (Komut.help.aliases) {
-			Komut.help.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-		}
-	});
-	console.log('');
-});
-
-client.reload = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			delete require.cache[require.resolve(`./komutlar/genel/${command}`)];
-			let Komut = require(`./komutlar/genel/${command}`);
-			client.commands.delete(command);
-			client.aliases.forEach((Komut, alias) => {
-				if (Komut === command) client.aliases.delete(alias);
-			});
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
-client.load = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			let Komut = require(`./komutlar/genel/${command}`);
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
 // ------ Eğlence Komutlar Bölümü ------- \\
 fs.readdir('./komutlar/eglence', (err, files) => {
 	console.log(`// (${files.length}) Eğlence Komutlar Bölümü \\\\`);
@@ -239,68 +177,6 @@ client.load = command => {
 	});
 };
 
-// ------- Oyun Komutlar Bölümü --------- \\
-fs.readdir('./komutlar/oyun', (err, files) => {
-	console.log(`// (${files.length}) Oyun Komutlar Bölümü \\\\`);
-	if (err) {
-		return console.error(err);
-	}
-	let jsFile = files.filter(f => f.endsWith('.js'));
-	if(jsFile.length <= 0) return console.log('JS dosyası yok! \n');
-	files.forEach((file) => {
-		if (!file.endsWith('.js')) {
-			return;
-		}
-		let Komut = require(`./komutlar/oyun/${file}`);
-		let Komutismi = file.split('.')[0];
-		client.commands.set(Komut.help.name, Komut);
-		console.log(`Komut : ${Komutismi}`);
-		if (Komut.help.aliases) {
-			Komut.help.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-		}
-	});
-	console.log('');
-});
-
-client.reload = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			delete require.cache[require.resolve(`./komutlar/oyun/${command}`)];
-			let Komut = require(`./komutlar/oyun/${command}`);
-			client.commands.delete(command);
-			client.aliases.forEach((Komut, alias) => {
-				if (Komut === command) client.aliases.delete(alias);
-			});
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
-client.load = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			let Komut = require(`./komutlar/oyun/${command}`);
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
 // ----- Moderasyon Komutlar Bölümü ----- \\
 fs.readdir('./komutlar/moderasyon', (err, files) => {
 	console.log(`// (${files.length}) Moderasyon Komutlar Bölümü \\\\`);
@@ -351,68 +227,6 @@ client.load = command => {
 	return new Promise((resolve, reject) => {
 		try {
 			let Komut = require(`./komutlar/moderasyon/${command}`);
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
-// ------- Koruma Komutlar Bölümü ------- \\
-fs.readdir('./komutlar/koruma', (err, files) => {
-	console.log(`// (${files.length}) Koruma Komutlar Bölümü \\\\`);
-	if (err) {
-		return console.error(err);
-	}
-	let jsFile = files.filter(f => f.endsWith('.js'));
-	if(jsFile.length <= 0) return console.log('JS dosyası yok! \n');
-	files.forEach((file) => {
-		if (!file.endsWith('.js')) {
-			return;
-		}
-		let Komut = require(`./komutlar/koruma/${file}`);
-		let Komutismi = file.split('.')[0];
-		client.commands.set(Komut.help.name, Komut);
-		console.log(`Komut : ${Komutismi}`);
-		if (Komut.help.aliases) {
-			Komut.help.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-		}
-	});
-	console.log('');
-});
-
-client.reload = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			delete require.cache[require.resolve(`./komutlar/koruma/${command}`)];
-			let Komut = require(`./komutlar/koruma/${command}`);
-			client.commands.delete(command);
-			client.aliases.forEach((Komut, alias) => {
-				if (Komut === command) client.aliases.delete(alias);
-			});
-			client.commands.set(command, Komut);
-			Komut.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, Komut.help.name);
-			});
-			resolve();
-		}
-		catch (e) {
-			reject(e);
-		}
-	});
-};
-
-client.load = command => {
-	return new Promise((resolve, reject) => {
-		try {
-			let Komut = require(`./komutlar/koruma/${command}`);
 			client.commands.set(command, Komut);
 			Komut.conf.aliases.forEach(alias => {
 				client.aliases.set(alias, Komut.help.name);
